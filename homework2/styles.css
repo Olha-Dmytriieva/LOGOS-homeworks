@@ -1,0 +1,15 @@
+body{
+    display: flex;
+   
+}
+
+form{
+    display: grid;
+}
+
+div{
+    /* margin-left: 70px;  */
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid red;
+}

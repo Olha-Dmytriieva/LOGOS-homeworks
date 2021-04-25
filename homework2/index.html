@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <form action="">
+        <label>
+            Баланс
+            <input  name="balance" value="2000"/>
+          </label>
+          
+          <label>
+            Пиво
+            <input  name="beer" value="100" id="10"/>
+          </label>
+          <label>
+            Вино
+            <input  name="wine" value="100" id = '40'/>
+          </label>
+          <label>
+            Пепсі
+            <input name="pepsi" value="100" id = '15'/>
+          </label>
+        </form>
+    </div>
+    <div>
+        <form action="">
+        <label>
+          Кількість
+        <input type="number" name="selection" />
+      </label>
+      <label>
+        <input type="radio" name="selector" value="beer"  />
+        Пиво
+      </label>
+      <label>
+        <input type="radio" name="selector" value="wine" />
+        Вино
+      </label>
+      <label>
+        <input type="radio" name="selector" value="pepsi" />
+        Пепсі
+      </label>
+
+      <button type="button" name="add-button">Додати</button>
+
+      <textarea name="preorder" id="" cols="30" rows="5" ></textarea>
+      <button type="button" name="buy-button" disabled = 'true'>Купити</button>
+        </form>
+        </div>
+    <div>
+        <form action="">
+            <textarea name="summary" id="" cols="30" rows="10" ></textarea>
+        </form>
+    </div>
+
+    <script src="/script.js" type="module"></script>
+</body>
+</html>

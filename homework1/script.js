@@ -1,4 +1,4 @@
-// //Classes task 1
+//Classes task 1
 
 class Worker {
   constructor(options) {
