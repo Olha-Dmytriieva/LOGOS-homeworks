@@ -1,14 +1,3 @@
-import './styles.css';
-import template from './template/template.hbs';
-import templateDetail from './template/templateDetailedFetch.hbs';
-const Handlebars = require('handlebars');
-
-Handlebars.registerHelper('if', function (conditional, options) {
-  if (Response === 'false') {
-    return options.fn(this);
-  }
-});
-
 const APIKey = '56ad793a';
 let inputValueForInitialFetch = '';
 
@@ -42,8 +31,19 @@ function searchBtnHandler(e) {
       return response.json();
     })
     .then(data => {
-      console.log(data);
-      itemToAppendRef.insertAdjacentHTML('afterbegin', template(data));
+      if (data.Response === 'True') {
+        data.Search.forEach(item =>
+          itemToAppendRef.insertAdjacentHTML(
+            'beforeend',
+            `<li><article><h2 class="Movie-title">${item.Title}</h2><img src="${item.Poster}" alt="" width="320" height="400"><p>${item.Year}</p><p>${item.Type}</p> <button type="button" value="details-button-js"> More details</button></article></li>`,
+          ),
+        );
+      } else {
+        itemToAppendRef.insertAdjacentHTML(
+          'beforeend',
+          ` <p>${data.Error}</p>`,
+        );
+      }
     })
     .catch(function (error) {
       console.log('error:', error);
@@ -61,7 +61,7 @@ function detailsDataHandler(e) {
     fetch(url)
       .then(response => response.json())
       .then(data =>
-        modal.insertAdjacentHTML('afterbegin', templateDetail(data)),
+        modal.insertAdjacentHTML('afterbegin', ` <article class="modal-content"><h2 class="Movie-title">${data.Title}</h2><img src="${data.Poster}" alt="" width="320" height="400"><p>${data.Plot}</p><p>${data.Year}</p><p>${data.Type}</p></article>`),
       );
     modal.style.display = 'block';
   }
@@ -73,3 +73,5 @@ window.onclick = function (event) {
     event.target.innerHTML = '';
   }
 };
+
+
