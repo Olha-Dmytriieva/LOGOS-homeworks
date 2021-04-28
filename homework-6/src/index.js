@@ -3,32 +3,29 @@ import template from './template/template.hbs';
 import templateDetail from './template/templateDetailedFetch.hbs';
 const Handlebars = require('handlebars');
 
+Handlebars.registerHelper('if', function (conditional, options) {
+  if (Response === 'false') {
+    return options.fn(this);
+  }
+});
 
-Handlebars.registerHelper("if", function(conditional, options) {
-    if (Response === "false") {
-      return options.fn(this);
-    }
-  });
+const APIKey = '56ad793a';
+let inputValueForInitialFetch = '';
 
-
+window.addEventListener('click', detailsDataHandler);
 const inputElementRef = document.querySelector('[name=search]');
 const searchBtnRef = document.getElementById('search-btn');
 const itemToAppendRef = document.querySelector('.item-to-append');
 const modal = document.getElementById('myModal');
 
 inputElementRef.addEventListener('input', inputElementHandler);
-let moreDetailsButtonRef = [];
-let inputValueForInitialFetch = '';
+searchBtnRef.addEventListener('click', searchBtnHandler);
 
 function inputElementHandler(e) {
   inputValueForInitialFetch = e.target.value;
 
   return inputValueForInitialFetch;
 }
-
-searchBtnRef.addEventListener('click', searchBtnHandler);
-
-const APIKey = '56ad793a';
 
 function searchBtnHandler(e) {
   const url = `http://www.omdbapi.com/?apikey=${APIKey}&s=${inputValueForInitialFetch}`;
@@ -42,11 +39,10 @@ function searchBtnHandler(e) {
       return Promise.resolve(response);
     })
     .then(response => {
-      // console.dir(response)
       return response.json();
     })
     .then(data => {
-        console.log(data);
+      console.log(data);
       itemToAppendRef.insertAdjacentHTML('afterbegin', template(data));
     })
     .catch(function (error) {
@@ -54,11 +50,7 @@ function searchBtnHandler(e) {
     });
 }
 
-window.addEventListener('click', detailsDataHandler);
-
 function detailsDataHandler(e) {
-    console.log(e.target)
-
   if (e.target.value === 'details-button-js') {
     //   e.stopPropagation()
     let valueForDetailedFetch =
@@ -69,7 +61,8 @@ function detailsDataHandler(e) {
     fetch(url)
       .then(response => response.json())
       .then(data =>
-        modal.insertAdjacentHTML('afterbegin', templateDetail(data)));
+        modal.insertAdjacentHTML('afterbegin', templateDetail(data)),
+      );
     modal.style.display = 'block';
   }
 }
